@@ -175,7 +175,6 @@ linux_tp2/
 ├── LICENSE                  licença de código visível, com o aviso LGPD
 ├── docs/
 │   ├── RELATORIO_TP2.md     relatório técnico, com os prints
-│   ├── ROTEIRO_VIDEO.md     roteiro do vídeo de 4 a 6 minutos
 │   ├── context/             enunciado e rubrica
 │   └── molde/               modelo do documento de entrega
 ├── evidencias/
@@ -200,8 +199,7 @@ linux_tp2/
 
 Os 12 exercícios estão executados e documentados, com as 29 telas e os arquivos de evidência. O
 documento de entrega (`andre_becker_DR2_TP2.pdf`, com os prints e os `.txt` no anexo) vai pela
-plataforma do Infnet e não é versionado aqui. O vídeo de 4 a 6 minutos segue o
-[roteiro](docs/ROTEIRO_VIDEO.md).
+plataforma do Infnet e não é versionado aqui.
 
 <p align="right"><a href="#indice">⬆ voltar ao índice</a></p>
 

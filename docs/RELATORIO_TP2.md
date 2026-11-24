@@ -5,7 +5,8 @@
 > Trimestre: 26E4_2\
 > Professor: Leonardo Silva da Gloria\
 > Aluno: André Luis Becker\
-> Sala: GRLENGR2C2-N2-L1
+> Sala: GRLENGR2C2-N2-L1\
+> Repositório: [andrebecker84/dr2-tp2-linux-hardware](https://github.com/andrebecker84/dr2-tp2-linux-hardware)
 
 <!--
 Fonte do documento de entrega (scripts/gerar-documento.py). O que fica entre "so-github" e
@@ -59,7 +60,14 @@ Fonte do documento de entrega (scripts/gerar-documento.py). O que fica entre "so
 Fiz os 12 exercícios no bash 5.3 do Ubuntu 26.04.1 LTS, no WSL2 do Windows 11, só com ferramentas de
 terminal. Os prints foram copiados do próprio terminal quando cada comando terminou, sem recorte nem
 edição. Cada exercício gerou o arquivo de evidência pedido, e todos ficam em `~/DR2_TP2`,
-reproduzidos no anexo.
+reproduzidos no anexo. O projeto completo é público no GitHub. Os links levam ao relatório técnico,
+ao repositório e aos arquivos de evidência:
+
+[Relatório técnico · docs/RELATORIO_TP2.md](https://github.com/andrebecker84/dr2-tp2-linux-hardware/blob/main/docs/RELATORIO_TP2.md)
+
+https://github.com/andrebecker84/dr2-tp2-linux-hardware
+
+[Arquivos de evidência (.txt) · evidencias/DR2_TP2](https://github.com/andrebecker84/dr2-tp2-linux-hardware/tree/main/evidencias/DR2_TP2)
 
 | Ex. | Tema | Comandos principais | Evidência |
 |---|---|---|---|

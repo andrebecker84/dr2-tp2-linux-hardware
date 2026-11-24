@@ -503,6 +503,14 @@ Comandos executados e finalidade
     man lsblk                        manual completo (Figura no relatório)
 Saída gravada
 $(recuo "$E/etapa4_auxiliar.txt")
+Principais informações
+    - lsblk, findmnt e udevadm estão na seção 8 do manual (administração do
+      sistema) e ficam em /usr/bin; "hashed" indica que o bash já guardou o
+      caminho de cada um.
+    - O man lsblk explica que o comando lê o sysfs e o banco do udev: por isso
+      as etapas 1 e 3 batem com o que /sys e o udev mostram.
+    - -o escolhe as colunas (usado na etapa 3 e no Ex. 10), -d omite as
+      partições e -s inverte a árvore (da partição até o disco).
 
 ================================================================================
 5. CONCLUSÃO

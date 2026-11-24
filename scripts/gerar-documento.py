@@ -48,7 +48,7 @@ DISCIPLINA_MOLDE = 'Microsserviços e DevOps com Spring Boot e Spring Cloud'
 PROFESSOR_MOLDE = 'Wesley Bruno Barbosa Silva'
 
 # Data que aparece no cabecalho de todas as paginas depois da capa.
-DATA_ENTREGA = '18/11/2026'
+DATA_ENTREGA = '23/11/2026'
 # Mesma data em ISO. O cabecalho nao guarda a data como texto simples: ela vive num controle de
 # conteudo ligado por data binding a customXml/item1.xml, e o Word reavalia esse vinculo ao abrir
 # o arquivo. Trocar so o texto nao adianta — ele volta para a data do molde na primeira abertura.
