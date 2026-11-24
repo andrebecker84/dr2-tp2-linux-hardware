@@ -53,9 +53,6 @@ divergência, prevalece o texto das cláusulas.
 
 1.1. "Software" — a contribuição original do Titular neste repositório:
 
-       · os scripts em scripts/: a execução dos doze exercícios no terminal,
-         a captura e a renderização das telas e a geração e exportação do
-         documento de entrega;
        · as evidências de execução em evidencias/: as telas do terminal e os
          arquivos de evidência (.txt) produzidos nos exercícios;
        · a documentação (README.md, docs/RELATORIO_TP2.md e as respostas,
@@ -233,8 +230,8 @@ alcançados por esta licença:
 
   · o texto do enunciado e da rubrica, reproduzidos em docs/context/ apenas
     como referência para a avaliação;
-  · o modelo de documento em docs/molde/, com a identidade visual do Instituto
-    Infnet, cujas marcas pertencem à instituição.
+  · a identidade visual do Instituto Infnet usada no documento de entrega,
+    que não é versionado aqui e cujas marcas pertencem à instituição.
 
 6.2. SISTEMA, FERRAMENTAS E SAÍDAS DE PROGRAMAS
 
@@ -316,13 +313,12 @@ A.1. DADOS CONTIDOS NO REPOSITÓRIO
      qualquer natureza.
 
 A.2. DADOS QUE O SOFTWARE TRATA QUANDO EM EXECUÇÃO
-     Nenhum dado pessoal. Os scripts leem informações técnicas do sistema
-     (/etc, /dev, /sys, /proc, o banco do udev e as mensagens do kernel no
-     journal) e gravam os resultados em ~/DR2_TP2 e na pasta do projeto. O
-     roteiro de captura também cria em ~/DR2_TP2 uma imagem de disco de
-     256 MiB e, como root, a associa a um loop device durante o Exercício 10,
-     desassociando-a ao final. Nenhum disco real é alterado e nada é enviado
-     pela rede.
+     Nenhum dado pessoal. Os comandos dos exercícios leem informações
+     técnicas do sistema (/etc, /dev, /sys, /proc, o banco do udev e as
+     mensagens do kernel no journal) e gravam os resultados em ~/DR2_TP2. No
+     Exercício 10, uma imagem de disco de 256 MiB foi criada em ~/DR2_TP2 e
+     associada, como root, a um loop device, desassociado ao final. Nenhum
+     disco real é alterado e nada é enviado pela rede.
 
 A.3. CONTATO
      Comunicações sobre dados pessoais relacionadas a este repositório devem

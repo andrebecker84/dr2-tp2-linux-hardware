@@ -18,6 +18,10 @@ andre_becker_DR2_TP2.pdf
 # Roteiro pessoal do vídeo de defesa (material de apoio, fora do repositório)
 docs/ROTEIRO_VIDEO.md
 
+# Ferramental local: scripts de captura e geração e o molde do documento de entrega
+scripts/
+docs/molde/
+
 # Capturas brutas do tmux (as telas em PNG ficam em evidencias/telas)
 evidencias/telas/ansi/
 

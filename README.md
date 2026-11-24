@@ -18,7 +18,7 @@
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-26.04.1%20LTS-E95420?style=flat-square&logo=ubuntu&logoColor=white)](#ambiente)
 [![WSL2](https://img.shields.io/badge/WSL2-kernel%206.18-0078D4?style=flat-square&logo=linux&logoColor=white)](#ambiente)
 [![bash](https://img.shields.io/badge/GNU%20bash-5.3.9-4EAA25?style=flat-square&logo=gnubash&logoColor=white)](#ambiente)
-[![tmux](https://img.shields.io/badge/tmux-3.6-1BB91F?style=flat-square&logo=tmux&logoColor=white)](#como-reproduzir)
+[![tmux](https://img.shields.io/badge/tmux-3.6-1BB91F?style=flat-square&logo=tmux&logoColor=white)](#como-foi-feito)
 [![License](https://img.shields.io/badge/license-source%20available-8957e5?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/status-pronto%20para%20entrega-2DA44E?style=flat-square)](#estado)
 
@@ -41,7 +41,7 @@
 | 01 | [Visão geral](#visao-geral) | 05 | [Atendimento à rubrica](#atendimento) |
 | 02 | [Os 12 exercícios](#exercicios) | 06 | [Estrutura do projeto](#estrutura) |
 | 03 | [Ambiente](#ambiente) | 07 | [Estado do projeto](#estado) |
-| 04 | [Como reproduzir](#como-reproduzir) | 08 | [Referências](#referencias) |
+| 04 | [Como foi feito](#como-foi-feito) | 08 | [Referências](#referencias) |
 | | | 09 | [Licença](#licenca) |
 
 ---
@@ -109,38 +109,19 @@ do terminal e a minha resposta.
 
 ---
 
-<a id="como-reproduzir"></a>
+<a id="como-foi-feito"></a>
 
-## ▶️ Como reproduzir
+## 🛠️ Como foi feito
 
-Os exercícios rodam num bash dentro de um tmux com configuração própria, isolada do `~/.tmux.conf`.
-Cada comando é digitado no terminal e executado de verdade, e cada tela é extraída do buffer do
-terminal (`tmux capture-pane`).
+Os exercícios rodaram num bash dentro de um tmux com configuração própria, isolada do `~/.tmux.conf`.
+Cada comando foi digitado no terminal e executado de verdade, e cada tela foi extraída do buffer do
+terminal (`tmux capture-pane`) e convertida em PNG, sem recorte nem edição.
 
-```bash
-wsl -d Ubuntu --exec bash scripts/capturar_telas.sh
-```
-
-O roteiro recomeça do zero (apaga `~/DR2_TP2`) e descobre sozinho o disco da raiz, cuja letra
-(`sdX`) muda de máquina para máquina. No Exercício 10 ele cria `disco_lab.img` (256 MiB, esparso)
-e, como root pelo próprio WSL, o associa a um loop device; ao final, desfaz a associação. Nenhum
-disco real é alterado.
-
-Para converter as telas em PNG:
-
-```bash
-uv run --no-project --with pillow python scripts/renderizar_telas.py
-```
-
-O documento de entrega é montado sobre o molde institucional e exportado pelo Word:
-
-```bash
-python scripts/gerar-documento.py
-```
-
-```bash
-powershell -ExecutionPolicy Bypass -File scripts/exportar-pdf.ps1
-```
+O disco analisado é o da raiz, identificado com `findmnt -no SOURCE /`, porque a letra (`sdX`)
+muda conforme a ordem em que o WSL anexa os discos. No Exercício 10, um arquivo `disco_lab.img`
+(256 MiB, esparso) recebeu duas partições GPT e foi associado, como root, a um loop device, para
+mostrar a hierarquia disco → partição; ao final, a associação foi desfeita. Nenhum disco real foi
+alterado.
 
 <p align="right"><a href="#indice">⬆ voltar ao índice</a></p>
 
@@ -175,18 +156,10 @@ linux_tp2/
 ├── LICENSE                  licença de código visível, com o aviso LGPD
 ├── docs/
 │   ├── RELATORIO_TP2.md     relatório técnico, com os prints
-│   ├── context/             enunciado e rubrica
-│   └── molde/               modelo do documento de entrega
-├── evidencias/
-│   ├── telas/               prints do terminal (29)
-│   └── DR2_TP2/             cópia de ~/DR2_TP2: os .txt e os diretórios dos exercícios
-└── scripts/
-    ├── capturar_telas.sh    executa os exercícios no tmux e grava telas e .txt
-    ├── renderizar_telas.py  telas do tmux → PNG
-    ├── gerar-documento.py   relatório → documento de entrega (.docx)
-    ├── exportar-pdf.ps1     .docx → PDF pelo Word
-    ├── tmux_tp2.conf        configuração isolada do tmux
-    └── bashrc_tp2           bash das capturas (carrega o ~/.bashrc)
+│   └── context/             enunciado e rubrica
+└── evidencias/
+    ├── telas/               prints do terminal (29)
+    └── DR2_TP2/             cópia de ~/DR2_TP2: os .txt e os diretórios dos exercícios
 ```
 
 <p align="right"><a href="#indice">⬆ voltar ao índice</a></p>
