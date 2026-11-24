@@ -1,0 +1,7 @@
+NAME MAJ:MIN TYPE SIZE RO FSTYPE MOUNTPOINTS
+sdf    8:80  disk   1T  0 ext4   /run/user
+                                 /
+TARGET    SOURCE                       FSTYPE OPTIONS
+/         /dev/sdf                     ext4   rw,relatime,discard,errors=remount-ro,data=ordered
+/run/user /dev/sdf[/mnt/wslg/run/user] ext4   rw,relatime,discard,errors=remount-ro,data=ordered
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:5/block/sdf

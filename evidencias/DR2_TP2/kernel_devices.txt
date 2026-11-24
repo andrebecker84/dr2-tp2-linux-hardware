@@ -1,0 +1,60 @@
+Nov 18 19:14:28 kernel: Command line: initrd=\initrd.img WSL_ROOT_INIT=1 panic=-1 nr_cpus=10 hv_utils.timesync_implicit=1 printk.devkmsg=on page_reporting.page_reporting_order=5 hv_storvsc.storvsc_max_hw_queues=4 console=hvc0 debug pty.legacy_count=0 WSL_ENABLE_CRASH_DUMP=1
+Nov 18 19:14:28 kernel: Kernel command line: initrd=\initrd.img WSL_ROOT_INIT=1 panic=-1 nr_cpus=10 hv_utils.timesync_implicit=1 printk.devkmsg=on page_reporting.page_reporting_order=5 hv_storvsc.storvsc_max_hw_queues=4 console=hvc0 debug pty.legacy_count=0 WSL_ENABLE_CRASH_DUMP=1
+Nov 18 19:14:28 kernel: SCSI subsystem initialized
+Nov 18 19:14:28 kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+Nov 18 19:14:28 kernel: Loading iSCSI transport class v2.0-870.
+Nov 18 19:14:28 kernel: hv_vmbus: registering driver hv_storvsc
+Nov 18 19:14:28 kernel: scsi host0: storvsc_host_t
+Nov 18 19:14:28 kernel: scsi 0:0:0:0: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
+Nov 18 19:14:28 kernel: scsi 0:0:0:1: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
+Nov 18 19:14:28 kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 18 19:14:28 kernel: sd 0:0:0:0: [sda] 1480544 512-byte logical blocks: (758 MB/723 MiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:1: Attached scsi generic sg1 type 0
+Nov 18 19:14:28 kernel: sd 0:0:0:1: [sdb] 199456 512-byte logical blocks: (102 MB/97.4 MiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:1: [sdb] Write Protect is on
+Nov 18 19:14:28 kernel: sd 0:0:0:0: [sda] Write Protect is on
+Nov 18 19:14:28 kernel: sd 0:0:0:0: [sda] Mode Sense: 0f 00 80 00
+Nov 18 19:14:28 kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: sd 0:0:0:1: [sdb] Mode Sense: 0f 00 80 00
+Nov 18 19:14:28 kernel: sd 0:0:0:1: [sdb] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: sd 0:0:0:0: [sda] Attached SCSI disk
+Nov 18 19:14:28 kernel: sd 0:0:0:1: [sdb] Attached SCSI disk
+Nov 18 19:14:28 kernel: scsi 0:0:0:2: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
+Nov 18 19:14:28 kernel: sd 0:0:0:2: Attached scsi generic sg2 type 0
+Nov 18 19:14:28 kernel: sd 0:0:0:2: [sdc] 8388616 512-byte logical blocks: (4.29 GB/4.00 GiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:2: [sdc] 4096-byte physical blocks
+Nov 18 19:14:28 kernel: sd 0:0:0:2: [sdc] Write Protect is off
+Nov 18 19:14:28 kernel: sd 0:0:0:2: [sdc] Mode Sense: 0f 00 00 00
+Nov 18 19:14:28 kernel: sd 0:0:0:2: [sdc] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: EXT4-fs (sda): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: none.
+Nov 18 19:14:28 kernel: EXT4-fs (sdb): mounted filesystem 00000000-0000-0000-0000-000000000000 ro without journal. Quota mode: none.
+Nov 18 19:14:28 kernel: sd 0:0:0:2: [sdc] Attached SCSI disk
+Nov 18 19:14:28 kernel: Adding 4194304k swap on /dev/sdc.  Priority:-2 extents:1 across:4194304k 
+Nov 18 19:14:28 kernel: scsi 0:0:0:3: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
+Nov 18 19:14:28 kernel: scsi 0:0:0:4: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
+Nov 18 19:14:28 kernel: sd 0:0:0:3: Attached scsi generic sg3 type 0
+Nov 18 19:14:28 kernel: sd 0:0:0:4: Attached scsi generic sg4 type 0
+Nov 18 19:14:28 kernel: sd 0:0:0:3: [sdd] 2147483648 512-byte logical blocks: (1.10 TB/1.00 TiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:3: [sdd] 4096-byte physical blocks
+Nov 18 19:14:28 kernel: sd 0:0:0:4: [sde] 286720 512-byte logical blocks: (147 MB/140 MiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:3: [sdd] Write Protect is off
+Nov 18 19:14:28 kernel: sd 0:0:0:3: [sdd] Mode Sense: 0f 00 00 00
+Nov 18 19:14:28 kernel: sd 0:0:0:3: [sdd] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: sd 0:0:0:4: [sde] Write Protect is off
+Nov 18 19:14:28 kernel: sd 0:0:0:4: [sde] Mode Sense: 0f 00 00 00
+Nov 18 19:14:28 kernel: sd 0:0:0:4: [sde] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: sd 0:0:0:4: [sde] Attached SCSI disk
+Nov 18 19:14:28 kernel: sd 0:0:0:3: [sdd] Attached SCSI disk
+Nov 18 19:14:28 kernel: EXT4-fs (sde): mounted filesystem 07772d79-43b8-4a70-a58a-79e0b07ee39b r/w with ordered data mode. Quota mode: none.
+Nov 18 19:14:28 kernel: EXT4-fs (sdd): recovery complete
+Nov 18 19:14:28 kernel: EXT4-fs (sdd): mounted filesystem cbfa9431-966a-4efb-9fb9-47130b44c7d4 r/w with ordered data mode. Quota mode: none.
+Nov 18 19:14:28 kernel: scsi 0:0:0:5: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
+Nov 18 19:14:28 kernel: sd 0:0:0:5: Attached scsi generic sg5 type 0
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] 2147483648 512-byte logical blocks: (1.10 TB/1.00 TiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] 4096-byte physical blocks
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Write Protect is off
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Mode Sense: 0f 00 00 00
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Attached SCSI disk
+Nov 18 19:14:28 kernel: EXT4-fs (sdf): mounted filesystem b1a2bdc5-121b-4a70-8549-a13fc6c2e5d3 r/w with ordered data mode. Quota mode: none.
+Nov 18 22:07:24 kernel: block sdf: the capability attribute has been deprecated.

@@ -1,0 +1,52 @@
+DR2-TP2 · Exercício 1 — Shell expansions
+André Luis Becker · Ubuntu 26.04.1 LTS (WSL2) · bash 5.3.9 · 18/11/2026 22:16
+--------------------------------------------------------------------------------
+REGISTRO DA SESSÃO (comandos e saídas, na ordem de execução)
+becker@alienwarePC:~$ # Exercício 1 - expansões do shell
+becker@alienwarePC:~$ mkdir -v ~/DR2_TP2 && cd ~/DR2_TP2
+mkdir: created directory '/home/becker/DR2_TP2'
+becker@alienwarePC:~/DR2_TP2$ mkdir -v ex01_expansoes && cd ex01_expansoes
+mkdir: created directory 'ex01_expansoes'
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ touch {kernel,udev,disco}.log relatorio_{01..03}.txt
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ mkdir -pv backup/{2025,2026}/{jan,fev}
+mkdir: created directory 'backup'
+mkdir: created directory 'backup/2025'
+mkdir: created directory 'backup/2025/jan'
+mkdir: created directory 'backup/2025/fev'
+mkdir: created directory 'backup/2026'
+mkdir: created directory 'backup/2026/jan'
+mkdir: created directory 'backup/2026/fev'
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ ls -F
+backup/  disco.log  kernel.log  relatorio_01.txt  relatorio_02.txt  relatorio_03.txt  udev.log
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ ls *.log
+disco.log  kernel.log  udev.log
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ echo *.log
+disco.log kernel.log udev.log
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ ls relatorio_0[13].txt
+relatorio_01.txt  relatorio_03.txt
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ ls /var/log/*.log
+/var/log/alternatives.log  /var/log/dpkg.log        /var/log/ubuntu-advantage-apt-hook.log
+/var/log/auth.log          /var/log/fontconfig.log  /var/log/ubuntu-advantage.log
+/var/log/bootstrap.log     /var/log/kern.log
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ echo /dev/sd{a..h}
+/dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg /dev/sdh
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ echo /dev/sd?
+/dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ echo ~
+/home/becker
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ echo "Logs aqui: $(ls *.log | wc -l) | 2^10 = $((2**10))"
+Logs aqui: 3 | 2^10 = 1024
+becker@alienwarePC:~/DR2_TP2/ex01_expansoes$ cd ..
+--------------------------------------------------------------------------------
+OBSERVAÇÕES
+- Chaves (brace expansion) GERAM texto: um único touch criou 6 arquivos
+  ({kernel,udev,disco}.log e relatorio_{01..03}.txt, com o zero à esquerda), e
+  backup/{2025,2026}/{jan,fev} gerou as 4 combinações; o -p criou os pais.
+- Curingas (globbing) CASAM com arquivos que já existem: *.log listou os logs
+  do diretório e de /var/log, e [13] escolheu só relatorio_01 e relatorio_03.
+- O echo *.log imprime a mesma lista do ls: quem expande é o shell, antes de
+  executar o comando, e o ls só recebe os nomes prontos.
+- /dev/sd{a..h} produz até sdg e sdh, que não existem; /dev/sd? devolve só os
+  discos presentes. Por isso uso curingas para LISTAR e chaves para CRIAR.
+- ~ (til), $(comando) e $((conta)) também são expansões: diretório pessoal,
+  substituição de comando e aritmética.

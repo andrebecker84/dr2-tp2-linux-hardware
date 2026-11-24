@@ -1,0 +1,38 @@
+DR2-TP2 · Exercício 5 — Uso correto de aspas no shell
+André Luis Becker · Ubuntu 26.04.1 LTS (WSL2) · bash 5.3.9 · 18/11/2026 22:16
+--------------------------------------------------------------------------------
+REGISTRO DA SESSÃO (comandos e saídas, na ordem de execução)
+becker@alienwarePC:~/DR2_TP2$ # Exercício 5 - aspas simples e duplas
+becker@alienwarePC:~/DR2_TP2$ echo 'Aspas simples: o shell não interpreta nada aqui dentro'
+Aspas simples: o shell não interpreta nada aqui dentro
+becker@alienwarePC:~/DR2_TP2$ echo "Aspas duplas: olá, $USER"
+Aspas duplas: olá, becker
+becker@alienwarePC:~/DR2_TP2$ echo 'Usuário: $USER | Kernel: $(uname -r)'
+Usuário: $USER | Kernel: $(uname -r)
+becker@alienwarePC:~/DR2_TP2$ echo "Usuário: $USER | Kernel: $(uname -r)"
+Usuário: becker | Kernel: 6.18.58.1-microsoft-standard-WSL2
+becker@alienwarePC:~/DR2_TP2$ echo Discos: /dev/sd?
+Discos: /dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf
+becker@alienwarePC:~/DR2_TP2$ echo "Discos: /dev/sd?"
+Discos: /dev/sd?
+becker@alienwarePC:~/DR2_TP2$ MSG="disco    da    raiz"
+becker@alienwarePC:~/DR2_TP2$ echo $MSG
+disco da raiz
+becker@alienwarePC:~/DR2_TP2$ echo "$MSG"
+disco    da    raiz
+becker@alienwarePC:~/DR2_TP2$ echo "Nas duplas: 'simples' é texto comum; \$HOME e \"aspas\" escapados"
+Nas duplas: 'simples' é texto comum; $HOME e "aspas" escapados
+--------------------------------------------------------------------------------
+OBSERVAÇÕES
+- Aspas simples: tudo é literal. $USER e $(uname -r) saíram como texto.
+- Aspas duplas: agrupam o texto num único argumento, mas mantêm a expansão de
+  variáveis ($USER) e de comandos ($(uname -r)).
+- CASO EM QUE O COMPORTAMENTO MUDA: o mesmo texto "Usuário: $USER | Kernel:
+  $(uname -r)" imprime becker e a versão do kernel com aspas duplas, e os
+  símbolos crus com aspas simples.
+- Curingas não expandem entre aspas: sem aspas, /dev/sd? virou a lista dos
+  discos; com aspas duplas, ficou o texto "/dev/sd?".
+- Variável sem aspas sofre divisão em palavras: echo $MSG juntou os espaços
+  repetidos, e echo "$MSG" os preservou. Por isso uso "$variavel" em scripts.
+- Dentro das duplas, a aspa simples é um caractere comum, e \$ e \" imprimem
+  o caractere literal.

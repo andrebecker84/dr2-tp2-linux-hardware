@@ -1,0 +1,61 @@
+none on /usr/lib/modules/6.18.58.1-microsoft-standard-WSL2 type overlay (rw,nosuid,nodev,noatime,lowerdir=/modules/6.18.58.1-microsoft-standard-WSL2/modules,upperdir=/lib/modules/6.18.58.1-microsoft-standard-WSL2/rw/upper,workdir=/lib/modules/6.18.58.1-microsoft-standard-WSL2/rw/work,uuid=on)
+/dev/sdb on /usr/src/linux-headers-6.18.58.1-microsoft-standard-WSL2 type ext4 (ro,relatime)
+none on /mnt/wsl type tmpfs (rw,relatime)
+none on /mnt/wsl/docker-desktop/shared-sockets/guest-services type tmpfs (rw,nosuid,nodev,mode=755)
+none on /mnt/wsl/docker-desktop/shared-sockets/host-services type tmpfs (rw,nosuid,nodev,mode=755)
+/mnt/docker-desktop-disk/isocache/entries/docker-wsl-cli.iso/088fba78db1002688f30b332ea5b2a99b724e793b319407fd7fdafc71a0bfdc5 on /mnt/wsl/docker-desktop/cli-tools type iso9660 (ro,relatime,nojoliet,check=s,map=n,blocksize=2048,iocharset=utf8)
+drivers on /usr/lib/wsl/drivers type 9p (ro,nosuid,nodev,noatime,aname=drivers;fmask=222;dmask=222,cache=0x5,access=client,msize=65536,trans=fd,rfd=8,wfd=8)
+/dev/sdf on / type ext4 (rw,relatime,discard,errors=remount-ro,data=ordered)
+none on /usr/lib/wsl/lib type overlay (rw,nosuid,nodev,noatime,lowerdir=/gpu_lib_packaged:/gpu_lib_inbox,upperdir=/gpu_lib/rw/upper,workdir=/gpu_lib/rw/work,uuid=on)
+rootfs on /init type rootfs (ro,size=8184420k,nr_inodes=2046105)
+none on /dev type devtmpfs (rw,nosuid,relatime,size=8184420k,nr_inodes=2046105,mode=755)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,noatime)
+proc on /proc type proc (rw,nosuid,nodev,noexec,noatime)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,noatime,gid=5,mode=620,ptmxmode=000)
+none on /run type tmpfs (rw,nosuid,nodev,mode=755)
+none on /run/lock type tmpfs (rw,nosuid,nodev,noexec,noatime)
+none on /run/shm type tmpfs (rw,nosuid,nodev,noatime)
+none on /dev/shm type tmpfs (rw,nosuid,nodev,noatime)
+none on /run/user type tmpfs (rw,nosuid,nodev,noexec,noatime,mode=755)
+binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,relatime)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate)
+C:\ on /mnt/c type 9p (rw,noatime,aname=drvfs;path=C:\;uid=1000;gid=1000;symlinkroot=/mnt/,cache=0x5,access=client,msize=65536,trans=fd,rfd=6,wfd=6)
+/dev/sdf on /run/user type ext4 (rw,relatime,discard,errors=remount-ro,data=ordered)
+none on /proc/sys/fs/binfmt_misc/status type tmpfs (rw,nosuid,nodev,mode=755)
+none on /run/credentials/systemd-journald.service type tmpfs (ro,nosuid,nodev,noexec,relatime,nosymfollow,size=1024k,nr_inodes=1024,mode=700,noswap)
+tracefs on /sys/kernel/tracing type tracefs (rw,nosuid,nodev,noexec,relatime)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime)
+debugfs on /sys/kernel/debug type debugfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,nr_inodes=1048576)
+configfs on /sys/kernel/config type configfs (rw,nosuid,nodev,noexec,relatime)
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,nosuid,nodev,relatime,pagesize=2M)
+fusectl on /sys/fs/fuse/connections type fusectl (rw,nosuid,nodev,noexec,relatime)
+none on /run/credentials/systemd-resolved.service type tmpfs (ro,nosuid,nodev,noexec,relatime,nosymfollow,size=1024k,nr_inodes=1024,mode=700,noswap)
+none on /run/credentials/getty@tty1.service type tmpfs (ro,nosuid,nodev,noexec,relatime,nosymfollow,size=1024k,nr_inodes=1024,mode=700,noswap)
+tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=1637908k,nr_inodes=409477,mode=700,uid=1000,gid=1000)
+tmpfs on /run/user/0 type tmpfs (rw,nosuid,nodev,relatime,size=1637908k,nr_inodes=409477,mode=700)
+none on /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/docker.sock type tmpfs (rw,nosuid,nodev,mode=755)
+C:\Program Files\Docker\Docker\resources on /Docker/host type 9p (rw,noatime,aname=drvfs;path=C:\Program)
+
+=== df -hT: uso de espaço de cada filesystem ===
+Filesystem                               Type     Size  Used Avail Use% Mounted on
+none                                     overlay  7.9G     0  7.9G   0% /usr/lib/modules/6.18.58.1-microsoft-standard-WSL2
+/dev/sdb                                 ext4      97M   97M     0 100% /usr/src/linux-headers-6.18.58.1-microsoft-standard-WSL2
+none                                     tmpfs    7.9G   23M  7.8G   1% /mnt/wsl
+none                                     tmpfs    7.9G  728K  7.9G   1% /mnt/wsl/docker-desktop/shared-sockets/host-services
+/dev/loop0                               iso9660  793M  793M     0 100% /mnt/wsl/docker-desktop/cli-tools
+drivers                                  9p       935G  742G  193G  80% /usr/lib/wsl/drivers
+/dev/sdf                                 ext4    1007G  9.0G  947G   1% /
+none                                     overlay  7.9G     0  7.9G   0% /usr/lib/wsl/lib
+rootfs                                   rootfs   7.9G  3.4M  7.9G   1% /init
+none                                     tmpfs    7.9G   23M  7.8G   1% /run
+none                                     tmpfs    7.9G     0  7.9G   0% /run/lock
+none                                     tmpfs    7.9G     0  7.9G   0% /run/shm
+C:\                                      9p       935G  742G  193G  80% /mnt/c
+none                                     tmpfs    1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs                                    tmpfs    7.9G  2.8M  7.9G   1% /tmp
+none                                     tmpfs    1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+none                                     tmpfs    1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs                                    tmpfs    1.6G  8.0K  1.6G   1% /run/user/1000
+tmpfs                                    tmpfs    1.6G  4.0K  1.6G   1% /run/user/0
+C:\Program Files\Docker\Docker\resources 9p       935G  742G  193G  80% /Docker/host

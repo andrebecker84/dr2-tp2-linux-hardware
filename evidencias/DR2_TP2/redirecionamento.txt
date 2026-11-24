@@ -1,0 +1,33 @@
+DR2-TP2 · Exercício 4 — Redirecionamento e abstração de dispositivos
+André Luis Becker · Ubuntu 26.04.1 LTS (WSL2) · bash 5.3.9 · 18/11/2026 22:16
+--------------------------------------------------------------------------------
+REGISTRO DA SESSÃO (comandos e saídas, na ordem de execução)
+becker@alienwarePC:~/DR2_TP2$ # Exercício 4 - redirecionamento e o dispositivo /dev/null
+becker@alienwarePC:~/DR2_TP2$ ls -l /dev/null
+crw-rw-rw- 1 root root 1, 3 Nov 18 19:14 /dev/null
+becker@alienwarePC:~/DR2_TP2$ uname -a
+Linux alienwarePC 6.18.58.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct 27 00:24:11 UTC 2026 x86_64 GNU/Linux
+becker@alienwarePC:~/DR2_TP2$ uname -a > /dev/null
+becker@alienwarePC:~/DR2_TP2$ echo "código de saída: $?"
+código de saída: 0
+becker@alienwarePC:~/DR2_TP2$ uname -a
+Linux alienwarePC 6.18.58.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct 27 00:24:11 UTC 2026 x86_64 GNU/Linux
+becker@alienwarePC:~/DR2_TP2$ ls /etc/hostname /naoexiste > /dev/null
+ls: cannot access '/naoexiste': No such file or directory
+becker@alienwarePC:~/DR2_TP2$ ls /etc/hostname /naoexiste 2> /dev/null
+/etc/hostname
+becker@alienwarePC:~/DR2_TP2$ ls /etc/hostname /naoexiste > /dev/null 2>&1
+becker@alienwarePC:~/DR2_TP2$ echo "bytes guardados em /dev/null: $(wc -c < /dev/null)"
+bytes guardados em /dev/null: 0
+--------------------------------------------------------------------------------
+DIFERENÇA OBSERVADA
+- uname -a > /dev/null: nada apareceu no terminal, e o código de saída 0
+  mostra que o comando rodou normalmente. A saída foi gravada no dispositivo
+  /dev/null, que aceita a escrita e descarta os dados.
+- uname -a, sem redirecionamento: a mesma linha voltou a aparecer na tela.
+- O ls -l mostra /dev/null como "c" (dispositivo de caractere), major 1 e
+  minor 3, do driver mem. O shell abriu esse arquivo especial com o mesmo >
+  de um arquivo comum: é a abstração "tudo é arquivo" do Unix.
+- O > desvia só a saída padrão (1). A mensagem de erro do arquivo inexistente
+  continuou na tela até eu desviar também a saída de erro (2> e 2>&1).
+- O wc -c < /dev/null leu 0 bytes: nada do que foi escrito ficou guardado.

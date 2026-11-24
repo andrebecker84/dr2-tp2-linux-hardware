@@ -1,0 +1,8 @@
+lsblk (8)            - list block devices
+findmnt (8)          - find a filesystem
+udevadm (8)          - udev management tool
+lsblk is hashed (/usr/bin/lsblk)
+findmnt is hashed (/usr/bin/findmnt)
+ -d, --nodeps         don't print slaves or holders
+ -o, --output <list>  output columns (see --list-columns)
+ -s, --inverse        inverse dependencies

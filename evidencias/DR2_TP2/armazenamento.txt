@@ -1,0 +1,13 @@
+NAME      MAJ:MIN TYPE   SIZE RO PARTLABEL FSTYPE  MOUNTPOINTS
+loop0       7:0   loop 792.2M  1           iso9660 /mnt/wsl/docker-desktop/cli-tools
+loop1       7:1   loop 611.3M  1           iso9660 
+loop2       7:2   loop   256M  0                   
+├─loop2p1 259:0   part    96M  0 dados             
+└─loop2p2 259:1   part   158M  0 logs              
+sda         8:0   disk 722.9M  1           ext4    
+sdb         8:16  disk  97.4M  1           ext4    /usr/src/linux-headers-6.18.58.1-microsoft-standard-WSL2
+sdc         8:32  disk     4G  0           swap    [SWAP]
+sdd         8:48  disk     1T  0           ext4    
+sde         8:64  disk   140M  0           ext4    
+sdf         8:80  disk     1T  0           ext4    /run/user
+                                                   /

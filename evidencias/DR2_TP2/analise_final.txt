@@ -1,0 +1,125 @@
+DR2-TP2 · Exercício 12 — Análise integrada de um dispositivo de armazenamento
+André Luis Becker · Ubuntu 26.04.1 LTS (WSL2) · bash 5.3.9 · 18/11/2026 22:17
+--------------------------------------------------------------------------------
+DISPOSITIVO ANALISADO: /dev/sdf
+Escolhido por ser o disco que guarda a raiz (/) do Ubuntu: é o dispositivo de
+armazenamento que o sistema realmente usa. Identificado com
+    findmnt -no SOURCE /                      -> /dev/sdf
+    DISCO=$(basename "$(findmnt -no SOURCE /)")
+A variável DISCO, sempre entre aspas duplas, isola o mesmo dispositivo em todos
+os pipelines abaixo (grep -w "$DISCO", awk -v d="$DISCO").
+
+================================================================================
+1. REPRESENTAÇÃO NO DIRETÓRIO /dev                       (ex12_analise/etapa1_dev.txt)
+================================================================================
+Comandos executados e finalidade
+    ls -l /dev | grep -w "$DISCO"
+        arquivo especial do disco: tipo, dono, grupo e major, minor
+    ls -l /dev/disk/by-id /dev/disk/by-uuid | grep -w "$DISCO"
+        nomes persistentes que o udev cria como links para o mesmo disco
+    udevadm info -q property -n "/dev/$DISCO" | grep -E '^(DEVTYPE|ID_...)='
+        metadados do udev: tipo, barramento, fabricante, modelo e filesystem
+Saída gravada
+    brw-rw----  1 root disk      8,  80 Nov 18 19:14 sdf
+    lrwxrwxrwx 1 root root 9 Nov 18 19:14 scsi-360022480602c9a873f44203d19d11491 -> ../../sdf
+    lrwxrwxrwx 1 root root 9 Nov 18 19:14 wwn-0x60022480602c9a873f44203d19d11491 -> ../../sdf
+    lrwxrwxrwx 1 root root  9 Nov 18 19:14 b1a2bdc5-121b-4a70-8549-a13fc6c2e5d3 -> ../../sdf
+    DEVTYPE=disk
+    ID_VENDOR=Msft
+    ID_MODEL=Virtual_Disk
+    ID_BUS=scsi
+    ID_FS_TYPE=ext4
+Principais informações
+    - "b" no início das permissões: dispositivo de BLOCO, major,minor 8:80,
+      do grupo disk (só root e o grupo disk leem o disco cru).
+    - O udev mantém nomes estáveis (by-id pelo identificador SCSI, by-uuid pelo
+      UUID do ext4): a letra sdf pode mudar entre boots, esses links não.
+    - Fabricante Msft, modelo Virtual_Disk, barramento scsi, filesystem ext4.
+
+================================================================================
+2. RECONHECIMENTO PELO KERNEL E PARTIÇÕES               (ex12_analise/etapa2_kernel.txt)
+================================================================================
+Comandos executados e finalidade
+    grep -E '^ *8 ' /proc/devices
+        driver que o kernel registrou para o major 8
+    awk -v d="$DISCO" 'NR==1 || $4==d' /proc/partitions
+        cabeçalho e a linha do disco na tabela de partições do kernel
+    ls -d /sys/block/$DISCO/${DISCO}* | wc -l
+        conta as partições que o kernel criou no sysfs (sdf1, sdf2...)
+    journalctl -k -b --no-pager --no-hostname | grep -w "$DISCO"
+        mensagens do kernel sobre o disco no boot atual
+Saída gravada
+      8 sd
+    major minor  #blocks  name
+       8       80 1073741824 sdf
+    partições de sdf no sysfs: 0
+    Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] 2147483648 512-byte logical blocks: (1.10 TB/1.00 TiB)
+    Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] 4096-byte physical blocks
+    Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Write Protect is off
+    Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Mode Sense: 0f 00 00 00
+    Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+    Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Attached SCSI disk
+    Nov 18 19:14:28 kernel: EXT4-fs (sdf): mounted filesystem b1a2bdc5-121b-4a70-8549-a13fc6c2e5d3 r/w with ordered data mode. Quota mode: none.
+    Nov 18 22:07:24 kernel: block sdf: the capability attribute has been deprecated.
+Principais informações
+    - O major 8 pertence ao driver sd (SCSI disk): o kernel trata o disco
+      virtual do Hyper-V (storvsc) como um disco SCSI comum.
+    - /proc/partitions traz só a linha de sdf, e o sysfs tem 0 partições: o
+      disco não tem tabela de partições. O ext4 ocupa o disco inteiro, como em
+      todo disco virtual do WSL. (A hierarquia disco -> partição foi mostrada
+      no Ex. 10 com o disco de laboratório.)
+    - O log do kernel registra a detecção (tamanho, setores lógicos de 512 e
+      físicos de 4096, cache de escrita) e a montagem do ext4.
+
+================================================================================
+3. ORGANIZAÇÃO NA HIERARQUIA DE BLOCK DEVICES       (ex12_analise/etapa3_hierarquia.txt)
+================================================================================
+Comandos executados e finalidade
+    lsblk -o NAME,MAJ:MIN,TYPE,SIZE,RO,FSTYPE,MOUNTPOINTS "/dev/$DISCO"
+        o disco na árvore de block devices, com tipo, tamanho e montagem
+    findmnt -S "/dev/$DISCO"
+        todos os pontos de montagem que usam esse dispositivo
+    readlink -f "/sys/block/$DISCO"
+        posição do disco na árvore de dispositivos do kernel
+Saída gravada
+    NAME MAJ:MIN TYPE SIZE RO FSTYPE MOUNTPOINTS
+    sdf    8:80  disk   1T  0 ext4   /run/user
+                                     /
+    TARGET    SOURCE                       FSTYPE OPTIONS
+    /         /dev/sdf                     ext4   rw,relatime,discard,errors=remount-ro,data=ordered
+    /run/user /dev/sdf[/mnt/wslg/run/user] ext4   rw,relatime,discard,errors=remount-ro,data=ordered
+    /sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:5/block/sdf
+Principais informações
+    - TYPE disk de 1T, sem filhos (part) no lsblk: confirma a etapa 2.
+    - Um único filesystem, montado em / e /run/user. O segundo é um bind
+      mount do subdiretório /mnt/wslg/run/user do mesmo ext4, feito pelo WSLg.
+    - No sysfs, o disco fica sob o barramento VMBus do Hyper-V, depois host
+      SCSI, alvo e LUN: é a cadeia que o driver percorre até chegar ao bloco.
+
+================================================================================
+4. COMANDO AUXILIAR                                     (ex12_analise/etapa4_auxiliar.txt)
+================================================================================
+Comandos executados e finalidade
+    whatis lsblk findmnt udevadm     descrição de uma linha, do índice do man
+    type lsblk findmnt               onde está cada comando (/usr/bin)
+    lsblk --help | grep ...          opções usadas e úteis (-o, -d, -s)
+    man lsblk                        manual completo (Figura no relatório)
+Saída gravada
+    lsblk (8)            - list block devices
+    findmnt (8)          - find a filesystem
+    udevadm (8)          - udev management tool
+    lsblk is hashed (/usr/bin/lsblk)
+    findmnt is hashed (/usr/bin/findmnt)
+     -d, --nodeps         don't print slaves or holders
+     -o, --output <list>  output columns (see --list-columns)
+     -s, --inverse        inverse dependencies
+
+================================================================================
+5. CONCLUSÃO
+================================================================================
+/dev/sdf é um disco SCSI virtual (Msft Virtual_Disk) de 1T, gravável, sem
+partições, formatado inteiro em ext4 e montado como a raiz do Ubuntu. O kernel
+o reconhece pelo driver sd (major 8), o udev cria o arquivo /dev/sdf e os nomes
+persistentes, o sysfs expõe seus atributos e o lsblk o organiza na hierarquia
+de block devices. Cada etapa foi gravada num arquivo próprio com > e reunida
+aqui por seções.

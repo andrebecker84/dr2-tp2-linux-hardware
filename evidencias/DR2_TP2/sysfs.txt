@@ -1,0 +1,52 @@
+DR2-TP2 · Exercício 6 — Exploração do sysfs
+André Luis Becker · Ubuntu 26.04.1 LTS (WSL2) · bash 5.3.9 · 18/11/2026 22:16
+--------------------------------------------------------------------------------
+REGISTRO DA SESSÃO (comandos e saídas, na ordem de execução)
+becker@alienwarePC:~/DR2_TP2$ # Exercício 6 - exploração do sysfs
+becker@alienwarePC:~/DR2_TP2$ ls /sys/block
+loop0  loop2  loop4  loop6  ram0  ram10  ram12  ram14  ram2  ram4  ram6  ram8  sda  sdc  sde
+loop1  loop3  loop5  loop7  ram1  ram11  ram13  ram15  ram3  ram5  ram7  ram9  sdb  sdd  sdf
+becker@alienwarePC:~/DR2_TP2$ findmnt -no SOURCE /
+/dev/sdf
+becker@alienwarePC:~/DR2_TP2$ cd /sys/block/sdf && ls
+alignment_offset  device             events_async       holders    partscan  removable  stat
+bdi               discard_alignment  events_poll_msecs  inflight   power     ro         subsystem
+capability        diskseq            ext_range          integrity  queue     size       trace
+dev               events             hidden             mq         range     slaves     uevent
+becker@alienwarePC:/sys/block/sdf$ cat size
+2147483648
+becker@alienwarePC:/sys/block/sdf$ cat dev
+8:80
+becker@alienwarePC:/sys/block/sdf$ echo "$(( $(cat size) * 512 / 1024**3 )) GiB"
+1024 GiB
+becker@alienwarePC:/sys/block/sdf$ grep . ro removable queue/{rotational,*_block_size} device/{vendor,model}
+ro:0
+removable:0
+queue/rotational:1
+queue/logical_block_size:512
+queue/physical_block_size:4096
+device/vendor:Msft    
+device/model:Virtual Disk    
+becker@alienwarePC:/sys/block/sdf$ pwd -P
+/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/fd1d2cbd-ce7c-535c-966b-eb5f811c95f0/host0/target0:0:0/0:0:0:5/block/sdf
+becker@alienwarePC:/sys/block/sdf$ cd ~/DR2_TP2
+--------------------------------------------------------------------------------
+DISPOSITIVO ESCOLHIDO: /dev/sdf, o disco que guarda a raiz (findmnt -no SOURCE /)
+
+ATRIBUTOS LIDOS EM /sys/block/sdf
+- size .....................: 2147483648 setores de 512 bytes = 1024 GiB
+- dev ......................: 8:80 (major:minor; o major 8 é o driver sd)
+- ro / removable ...........: 0 / 0 (gravável e não removível)
+- queue/rotational .........: 1 (o disco virtual se declara rotacional)
+- logical/physical_block ...: 512 / 4096 bytes
+- device/vendor e model ....: Msft Virtual Disk
+
+OBSERVAÇÕES
+- O sysfs não guarda arquivos em disco: cada leitura pede o valor ao kernel,
+  que o gera na hora (um valor por arquivo, em texto).
+- size conta sempre setores de 512 bytes, mesmo com bloco físico de 4096.
+- rotational = 1 é o que o Hyper-V informa. O arquivo .vhdx está num SSD NVMe
+  do Windows: o atributo descreve o disco virtual, não a mídia física.
+- pwd -P mostra o caminho real: /sys/block/sdf é um link para
+  /sys/devices/..., a posição do disco na árvore de barramentos (host SCSI,
+  alvo, LUN e, por fim, o bloco).

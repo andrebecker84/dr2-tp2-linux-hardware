@@ -1,0 +1,9 @@
+brw-rw----  1 root disk      8,  80 Nov 18 19:14 sdf
+lrwxrwxrwx 1 root root 9 Nov 18 19:14 scsi-360022480602c9a873f44203d19d11491 -> ../../sdf
+lrwxrwxrwx 1 root root 9 Nov 18 19:14 wwn-0x60022480602c9a873f44203d19d11491 -> ../../sdf
+lrwxrwxrwx 1 root root  9 Nov 18 19:14 b1a2bdc5-121b-4a70-8549-a13fc6c2e5d3 -> ../../sdf
+DEVTYPE=disk
+ID_VENDOR=Msft
+ID_MODEL=Virtual_Disk
+ID_BUS=scsi
+ID_FS_TYPE=ext4

@@ -1,0 +1,12 @@
+  8 sd
+major minor  #blocks  name
+   8       80 1073741824 sdf
+partições de sdf no sysfs: 0
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] 2147483648 512-byte logical blocks: (1.10 TB/1.00 TiB)
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] 4096-byte physical blocks
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Write Protect is off
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Mode Sense: 0f 00 00 00
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Nov 18 19:14:28 kernel: sd 0:0:0:5: [sdf] Attached SCSI disk
+Nov 18 19:14:28 kernel: EXT4-fs (sdf): mounted filesystem b1a2bdc5-121b-4a70-8549-a13fc6c2e5d3 r/w with ordered data mode. Quota mode: none.
+Nov 18 22:07:24 kernel: block sdf: the capability attribute has been deprecated.
